@@ -30,8 +30,8 @@ prediction_generated = False
 
 while True:
     if new_word_needed:
-        if game.words_count <= 10 and prediction_generated == False:
-            print(f'Only {game.words_count} words left, here they are:\n    ', end='')
+        if game.words_count <= 5 and game.words_count > 1 and prediction_generated == False:
+            print(f'Only {game.words_count} words left, here they are. You can choose the word manually if you want:\n    ', end='')
             for word in game.words:
                 print(f'\x1b[1;32m{word}\x1b[0m    ', end='')
             print('\n')
@@ -54,6 +54,7 @@ while True:
         print('I am very happy to help you!')
         print('\x1b[1;31mResetting.....\n\x1b[0m')
         game.reset()
+        prediction_generated = False
         continue
     elif set(pattern) <= set('+-?') and len(pattern) == game.word_length:
         game.setInfo(suggested_word, pattern)
@@ -70,6 +71,7 @@ while True:
     elif pattern == 'reset':
         print('\x1b[1;31mResetting.....\n\x1b[0m')
         game.reset()
+        prediction_generated = False
         continue
     elif pattern == 'exit':
         print('Thanks for using this program!')

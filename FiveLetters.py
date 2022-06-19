@@ -33,7 +33,7 @@ class FiveLetters:
     def findBestWords(self):
         sorted_words = [[] for _ in range(0, self.word_length)]
         for word in self.words:
-            sorted_words[len(set(word))].append(word)
+            sorted_words[self.word_length - len(set(word))].append(word)
         for proposed_words in sorted_words:
             if len(proposed_words) != 0:
                 return proposed_words
@@ -42,7 +42,7 @@ class FiveLetters:
     def nextWord(self):
         if len(self.words) == 0:
             return None
-        return random.choice(self.words)
+        return random.choice(self.findBestWords())
 
     def removeWord(self, word):
         self.words.remove(word)
